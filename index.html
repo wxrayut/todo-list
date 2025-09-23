@@ -1,15 +1,154 @@
 <!DOCTYPE html>
-<html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>My To-Do List</h1>
-    <input type="text" id="task" placeholder="เพิ่มงานใหม่..." />
-    <button onclick="addTask()">เพิ่ม</button>
-    <ul id="list"></ul>
-    <script src="scripts/index.js"></script>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles/style.css" />
+
+        <title>My Stupid Todo List</title>
+    </head>
+    <body>
+        <div class="app" id="app" data-theme="light">
+            <header>
+                <h1>My Stupid Todo List</h1>
+                <!-- <div style="display: flex; gap: 8px; align-items: center">
+                    <label class="small">Dark</label>
+                    <input type="checkbox" id="themeToggle" />
+                </div> -->
+            </header>
+
+            <main class="panel">
+                <section class="composer">
+                    <div class="main">
+                        <input
+                            id="newTaskInput"
+                            type="text"
+                            placeholder="Add task. . ."
+                            aria-label="New task"
+                        />
+                        <input
+                            id="dueInput"
+                            type="date"
+                            aria-label="Due date"
+                        />
+                        <select id="prioritySelect" aria-label="Priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="addBtn">Add</button>
+                </section>
+
+                <section
+                    style="
+                        margin-top: 12px;
+                        display: flex;
+                        gap: 12px;
+                        align-items: center;
+                        justify-content: space-between;
+                    "
+                >
+                    <div class="search">
+                        <input
+                            id="search"
+                            type="text"
+                            placeholder="Search tasks. . ."
+                            style="
+                                padding: 10px;
+                                border-radius: 8px;
+                                border: 1px solid rgba(15, 23, 42, 0.06);
+                            "
+                        />
+                        <select
+                            id="sortSelect"
+                            style="
+                                padding: 10px;
+                                border-radius: 8px;
+                                border: 1px solid rgba(15, 23, 42, 0.06);
+                            "
+                        >
+                            <option value="created">Created</option>
+                            <option value="due">Due date</option>
+                            <option value="priority">Priority</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn ghost" id="importBtn">Import</button>
+                        <input
+                            id="importFile"
+                            type="file"
+                            accept="application/json"
+                            style="display: none"
+                        />
+                        <button class="btn ghost" id="exportBtn">Export</button>
+                    </div>
+                </section>
+
+                <ul id="list"></ul>
+
+                <div
+                    style="
+                        margin-top: 12px;
+                        display: flex;
+                        gap: 8px;
+                        align-items: center;
+                        justify-content: space-between;
+                    "
+                >
+                    <div class="small" id="stats">0 tasks</div>
+                    <div style="display: flex; gap: 8px">
+                        <button id="clearCompleted" class="btn ghost">
+                            Clear completed
+                        </button>
+                        <button id="clearAll" class="btn ghost">
+                            Clear all
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="panel sidebar">
+                <div class="section">
+                    <strong>Filters</strong>
+                    <div class="filters" style="margin-top: 8px">
+                        <button data-filter="all" class="filterBtn active">
+                            All
+                        </button>
+                        <button data-filter="active" class="filterBtn">
+                            Active
+                        </button>
+                        <button data-filter="completed" class="filterBtn">
+                            Completed
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <!-- <strong>Tags</strong> -->
+                    <div
+                        id="tagList"
+                        style="
+                            margin-top: 8px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 6px;
+                        "
+                    ></div>
+                </div>
+
+                <!-- 
+                <div class="section">
+                    <strong>Shortcuts</strong>
+                    <div class="small" style="margin-top: 8px">
+                        / focus search<br />N new task input<br />Enter add task
+                    </div>
+                </div> -->
+            </aside>
+        </div>
+
+        <div id="toastRoot" style="display: none"></div>
+    </body>
+
+    <script type="module" src="scripts/app.js"></script>
 </html>
